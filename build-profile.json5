@@ -1,6 +1,20 @@
 {
   "app": {
-    "signingConfigs": [],
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "C:\\Users\\Administrator\\.ohos\\config\\auto_debug_TestBanner_com.zyz.testbanner_70086000158193063.cer",
+          "storePassword": "0000001B18D5E97B0CE3408E66EED6C5A69C9293D357ACEAFA47DE8EB7C4735B4671FF02BF87FEDE2C59FD",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001B50A76AE4B9C1F6BB60E3EF7CA9A191A14E08D3290A9A77E1AA067F9275F5EC948B610387D33A0C",
+          "profile": "C:\\Users\\Administrator\\.ohos\\config\\auto_debug_TestBanner_com.zyz.testbanner_70086000158193063.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "C:\\Users\\Administrator\\.ohos\\config\\auto_debug_TestBanner_com.zyz.testbanner_70086000158193063.p12"
+        }
+      }
+    ],
     "compileSdkVersion": 9,
     "compatibleSdkVersion": 9,
     "products": [

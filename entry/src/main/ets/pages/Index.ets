@@ -1,4 +1,5 @@
 import { SwiperComponent } from '../components/SwiperComponent'
+import { SwiperComponentHalfFold } from '../components/SwiperComponentHalfFold'
 import { SwiperComponentThreeEle } from '../components/SwiperComponentThreeEle'
 
 @Entry
@@ -10,7 +11,8 @@ struct Index {
     Row() {
       Column() {
         // SwiperComponent()
-        SwiperComponentThreeEle()
+        // SwiperComponentThreeEle()
+        SwiperComponentHalfFold()
       }
       .width('100%')
     }

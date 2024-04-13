@@ -1,13 +1,12 @@
 import { SwiperData } from '../model/SwiperData';
+import Logger from '../utils/Logger';
 
 /**
  * 层叠轮播图组件
- * 通过stack组件堆叠图片，实现多层级效果，配合手势滑动和显式动画实现切换的动画效果。
- * 同时通过改变数据中间值currentIndex来改变组件zIndex层级和高度来实现切换的效果。
- * 左右各有 2 个 Item, 从中间的 Item 到左右高度依次递减
+ * 是 SwiperComponent 的修改版, 只显示右侧的折叠部分
  */
 @Component
-export struct SwiperComponent {
+export struct SwiperComponentHalfFold {
   @State currentIndex: number = 0;
   @State swiperData: SwiperData[] = [
     new SwiperData($r("app.media.mp_chart"), 'MpChart图表实现案例'),
@@ -21,6 +20,7 @@ export struct SwiperComponent {
   private manualSlidingDuration: number = 800;    //手动滑动时长
   private automaticSlidingDuration: number = 300;
   private automaticSwitchTime: number = 5000;
+  private offsetXValue = 15;
   @State swiperInterval: number = 0
 
   aboutToAppear(): void {
@@ -67,8 +67,9 @@ export struct SwiperComponent {
     }
     if (tempOffset === 2) {
       // 根据图片层级系数来决定左右偏移量
-      offsetX = -15 * offsetIndex;
+      offsetX = -this.offsetXValue * offsetIndex;
     }
+    Logger.info("TAG", "index = " + index + " offsetX = " + offsetX)
     return offsetX;
   }
 
@@ -156,7 +157,8 @@ export struct SwiperComponent {
           clearInterval(this.swiperInterval);
         }
       })
-      .height($r('app.string.main_page_swiper_height'))
+      //高度必须和 app.string.swiper_stack_height1 相同
+      .height($r('app.string.swiper_stack_height1'))
       .width('100%')
       .gesture(
         PanGesture({ direction: PanDirection.Horizontal })
@@ -170,12 +172,11 @@ export struct SwiperComponent {
             }, this.automaticSwitchTime);
           })
       )
-      .alignContent(Alignment.Center)
-      .padding({
-        left: $r('app.string.main_page_padding2'),
-        right: $r('app.string.main_page_padding2'),
-        top: $r('app.string.main_page_padding2')
-      })
+      .alignContent(Alignment.Start)
+      .backgroundColor($r("app.color.green"))
+      .clip(true) //裁剪超出 banner 左侧的层叠部分
+      .margin({left: "100vp"})
+      // .margin({left: -this.offsetXValue * 2}) //整体左移动两个位移
 
       //底部指示器
       Row({ space: 10 }) {
@@ -188,5 +189,8 @@ export struct SwiperComponent {
       .margin({ top: 12 })
     }
     .width('100%')
+    .height('100%')
+    .backgroundColor($r("app.color.blue"))
+    .justifyContent(FlexAlign.Start)
   }
 }

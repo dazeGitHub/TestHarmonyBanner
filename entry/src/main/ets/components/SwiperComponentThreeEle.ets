@@ -6,7 +6,6 @@ import { SwiperData } from '../model/SwiperData';
  */
 @Component
 export struct SwiperComponentThreeEle {
-  @Consume('pageStack') pageStack: NavPathStack;
   @State currentIndex: number = 0;
   @State swiperData: SwiperData[] = [
     new SwiperData($r("app.media.mp_chart"), 'MpChart图表实现案例'),
@@ -111,7 +110,7 @@ export struct SwiperComponentThreeEle {
             }
             .height($r('app.string.bottom_title_height'))
           }
-          .shadow(ShadowStyle.OUTER_DEFAULT_SM)
+          // .shadow(ShadowStyle.OUTER_DEFAULT_SM)
           .backgroundColor(Color.White)
           .borderRadius(8)
           .offset({
@@ -123,10 +122,12 @@ export struct SwiperComponentThreeEle {
           .zIndex(index !== this.currentIndex && this.getImgCoefficients(index) === 0 ?
             0 : 2 - Math.abs(this.getImgCoefficients(index)))
           .width($r('app.string.swiper_stack_width'))
-          .height(index !== this.currentIndex ? $r('app.string.swiper_stack_height1') : $r('app.string.swiper_stack_height2'))
+          // 通过修改高度来控制 banner 的子 Item 的高度
+          // .height(index !== this.currentIndex ? $r('app.string.swiper_stack_height1') : $r('app.string.swiper_stack_height2'))
+          .height($r("app.string.swiper_stack_height3"))
           .onClick(() => {
             // 点击轮播图Item时，根据点击的模块信息，将页面放入路由栈
-            DynamicsRouter.push(item.routerInfo, item.param);
+            // DynamicsRouter.push(item.routerInfo, item.param);
           })
         })
       }

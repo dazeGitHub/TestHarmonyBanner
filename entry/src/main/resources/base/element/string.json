@@ -102,11 +102,15 @@
     },
     {
       "name": "swiper_stack_height1",
-      "value": "130"
+      "value": "180"
     },
     {
       "name": "swiper_stack_height2",
-      "value": "180"
+      "value": "150"
+    },
+    {
+      "name": "swiper_stack_height3",
+      "value": "130"
     },
     {
       "name": "swiper_stack_width",
